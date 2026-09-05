@@ -1,0 +1,272 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1976d2">
+  <title>EBD Olenka</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #1976d2;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 18px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #1976d2;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .conteudo {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .conteudo.ativo {
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .voltar {
+      background: #555;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+      .menu {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>📖 EBD Olenka</h1>
+  <p>Escola Bíblica Dominical - Jardim de Infância Olenka</p>
+</header>
+
+<div class="container">
+
+  <div id="inicio" class="conteudo ativo">
+    <div class="card">
+      <h2>Bem-vindo!</h2>
+      <p>Aplicativo de gerenciamento da Escola Bíblica Dominical.</p>
+    </div>
+
+    <div class="menu">
+      <button onclick="abrir('secretaria')">👥 Secretaria</button>
+      <button onclick="abrir('superintendencia')">📚 Superintendência</button>
+      <button onclick="abrir('tesouraria')">💰 Tesouraria</button>
+      <button onclick="abrir('presenca')">✅ Presença</button>
+      <button onclick="abrir('relatorios')">📊 Relatórios</button>
+      <button onclick="abrir('alunos')">👦 Alunos</button>
+    </div>
+  </div>
+
+  <div id="secretaria" class="conteudo">
+    <button class="voltar" onclick="inicio()">⬅ Voltar</button>
+    <div class="card">
+      <h2>👥 Secretaria</h2>
+      <p>Área para organização da EBD.</p>
+      <input id="nomeAluno" placeholder="Nome do aluno">
+      <button onclick="cadastrarAluno()">Cadastrar aluno</button>
+      <p id="resultadoAluno"></p>
+    </div>
+  </div>
+
+  <div id="superintendencia" class="conteudo">
+    <button class="voltar" onclick="inicio()">⬅ Voltar</button>
+    <div class="card">
+      <h2>📚 Superintendência</h2>
+      <ul>
+        <li>Classes</li>
+        <li>Professores</li>
+        <li>Lições</li>
+        <li>Planejamento</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="tesouraria" class="conteudo">
+    <button class="voltar" onclick="inicio()">⬅ Voltar</button>
+    <div class="card">
+      <h2>💰 Tesouraria</h2>
+      <input id="valor" type="number" placeholder="Valor">
+      <input id="descricao" placeholder="Descrição">
+      <button onclick="registrarValor()">Registrar</button>
+      <p id="resultadoValor"></p>
+    </div>
+  </div>
+
+  <div id="presenca" class="conteudo">
+    <button class="voltar" onclick="inicio()">⬅ Voltar</button>
+    <div class="card">
+      <h2>✅ Presença</h2>
+      <p>Controle de presença dos alunos.</p>
+      <button onclick="registrarPresenca()">Registrar presença hoje</button>
+      <p id="resultadoPresenca"></p>
+    </div>
+  </div>
+
+  <div id="relatorios" class="conteudo">
+    <button class="voltar" onclick="inicio()">⬅ Voltar</button>
+    <div class="card">
+      <h2>📊 Relatórios</h2>
+      <ul>
+        <li>Relatório de alunos</li>
+        <li>Relatório de presença</li>
+        <li>Relatório financeiro</li>
+        <li>Relatório de professores</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="alunos" class="conteudo">
+    <button class="voltar" onclick="inicio()">⬅ Voltar</button>
+    <div class="card">
+      <h2>👦 Alunos cadastrados</h2>
+      <p id="listaAlunos">Nenhum aluno cadastrado nesta versão.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  EBD Olenka • Escola Bíblica Dominical
+</footer>
+
+<script>
+  function esconderTudo() {
+    document.querySelectorAll('.conteudo').forEach(function(el) {
+      el.classList.remove('ativo');
+    });
+  }
+
+  function abrir(id) {
+    esconderTudo();
+    document.getElementById(id).classList.add('ativo');
+    window.scrollTo(0, 0);
+  }
+
+  function inicio() {
+    esconderTudo();
+    document.getElementById('inicio').classList.add('ativo');
+    window.scrollTo(0, 0);
+  }
+
+  function cadastrarAluno() {
+    const nome = document.getElementById('nomeAluno').value.trim();
+
+    if (!nome) {
+      alert('Digite o nome do aluno.');
+      return;
+    }
+
+    localStorage.setItem('ultimoAluno', nome);
+
+    document.getElementById('resultadoAluno').innerHTML =
+      '✅ Aluno <strong>' + nome + '</strong> cadastrado!';
+  }
+
+  function registrarValor() {
+    const valor = document.getElementById('valor').value;
+    const descricao = document.getElementById('descricao').value;
+
+    if (!valor || !descricao) {
+      alert('Preencha o valor e a descrição.');
+      return;
+    }
+
+    document.getElementById('resultadoValor').innerHTML =
+      '✅ Registro salvo: R$ ' + valor + ' - ' + descricao;
+  }
+
+  function registrarPresenca() {
+    const data = new Date().toLocaleDateString('pt-BR');
+
+    document.getElementById('resultadoPresenca').innerHTML =
+      '✅ Presença registrada em ' + data;
+  }
+</script>
+
+</body>
+</html>
